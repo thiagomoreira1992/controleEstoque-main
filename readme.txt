@@ -1,5 +1,5 @@
 
-# Descrição do Proejeto
+# Descrição do Projeto
 
 API Desenvolvida para fazer o controle de estoque de materiais e medicamentos.
 Projeto desenvolvido com base em conhecimentos adquiridos na Semana Omnistack 11, da RocketSeat
