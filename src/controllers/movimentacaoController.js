@@ -1,5 +1,6 @@
 const Movimentacao = require('../models/movimentacao');
 const Material = require('../models/material');
+const sequelize = require('../db');
 //const { BelongsTo, HasMany } = require('sequelize/types');
 
 class MovimentacaoController {
@@ -63,6 +64,7 @@ class MovimentacaoController {
             model: Movimentacao,
             mapToModel: true
         });
+        console.log(movimentacao)
         return res.json(movimentacao);
     }
 

@@ -24,6 +24,7 @@ routes.post('/alterarMaterial', MaterialController.alterar);
 routes.get('/verificaValidade', MaterialController.verificaValidade);
 routes.post('/listarIdCategoria', MaterialController.listarIdCategoria);
 routes.post('/listarId', MaterialController.listarMaterial);
+routes.post('/listarBusca', MaterialController.listarBusca);
 
 routes.post('/criarMovimentacao', MovimentacaoController.criar);
 routes.get('/listarMovimentacao', MovimentacaoController.listarTodos);

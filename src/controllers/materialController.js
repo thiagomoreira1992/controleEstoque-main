@@ -47,8 +47,21 @@ class MaterialController {
         }
     }
 
-    async listarMaterial(req, res){
+    async listarMaterial(req, res) {
         const material = await Material.findByPk(req.body.id);
+        return res.json(material);
+    }
+
+    async listarBusca(req, res) {
+        console.log(req.body);
+        const material = await Material.findAll({
+            where: {
+                nome: {
+                    [Op.iLike]: `%${req.body.busca}%`
+                }
+            }
+        }
+        );
         return res.json(material);
     }
 
@@ -75,7 +88,7 @@ class MaterialController {
         console.log(req.body.idCategoria);
         const busca = await Material.findByPk(req.body.id);
         let idCategoria = req.body.idCategoria.length < 1 ? busca.idCategoria : req.body.idCategoria;
-        let nome = req.body.nome.length < 1 ? busca.nome : req.body.nome;        
+        let nome = req.body.nome.length < 1 ? busca.nome : req.body.nome;
         let validade = req.body.validade.length < 1 ? busca.validade : req.body.validade;
         let apresentacao = req.body.apresentacao.length < 1 ? busca.apresentacao : req.body.apresentacao;
         let lote = req.body.lote.length < 1 ? busca.lote : req.body.lote;
