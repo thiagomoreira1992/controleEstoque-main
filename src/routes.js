@@ -25,9 +25,11 @@ routes.get('/verificaValidade', MaterialController.verificaValidade);
 routes.post('/listarIdCategoria', MaterialController.listarIdCategoria);
 routes.post('/listarId', MaterialController.listarMaterial);
 routes.post('/listarBusca', MaterialController.listarBusca);
+routes.get('/group', MaterialController.group);
 
 routes.post('/criarMovimentacao', MovimentacaoController.criar);
 routes.get('/listarMovimentacao', MovimentacaoController.listarTodos);
+routes.get('/gastosdomes', MovimentacaoController.listarMateriaisGastos);
 
 routes.get('/', function(req,res){
     res.send('Teste');

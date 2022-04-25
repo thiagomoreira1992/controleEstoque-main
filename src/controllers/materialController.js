@@ -2,6 +2,7 @@ const Material = require('../models/material');
 const Categoria = require('../models/categoria');
 const { Op } = require('sequelize');
 const moment = require('moment');
+const sequelize = require('../db');
 
 class MaterialController {
 
@@ -82,6 +83,21 @@ class MaterialController {
         })
 
         return res.json(material);
+    }
+
+    async group(req, res) {
+        try {
+            /*const material = await Material.findAll({
+                group: 'nome',
+                sequelize.fn('sum', sequelize.col('quantidade'))
+            });
+            return res.json(material);*/
+            const material = await sequelize.query('SELECT materials.nome AS nome, sum(materials.quantidade) as quantidade, materials.apresentacao as apresentacao FROM materials GROUP BY nome, apresentacao;')
+            return res.json(material);
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 
     async alterar(req, res) {

@@ -1,6 +1,7 @@
 const Movimentacao = require('../models/movimentacao');
 const Material = require('../models/material');
 const sequelize = require('../db');
+const moment = require('moment');
 //const { BelongsTo, HasMany } = require('sequelize/types');
 
 class MovimentacaoController {
@@ -65,6 +66,17 @@ class MovimentacaoController {
             mapToModel: true
         });
         console.log(movimentacao)
+        return res.json(movimentacao);
+    }
+
+    async listarMateriaisGastos(req, res){
+        const monthFirstDay = moment().startOf('month').format("YYYY-MM-DD");
+        const monthLastDay = moment().endOf('month').format("YYYY-MM-DD");
+        const movimentacao = await sequelize.query(`select materials.nome, sum(movimentacaos.quantidade) as quantidade from movimentacaos inner join materials on materials.id = movimentacaos.\"idMaterial\" where movimentacaos.quantidade < 0 and movimentacaos.\"createdAt\" between '${monthFirstDay}' and '${monthLastDay}' group by materials.nome order by materials.nome;`, {
+            model: Movimentacao,
+            mapToModel: true
+        });
+        console.log(monthFirstDay);
         return res.json(movimentacao);
     }
 
